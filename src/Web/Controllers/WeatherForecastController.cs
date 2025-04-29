@@ -21,6 +21,10 @@ public class WeatherForecastController : ControllerBase
     [HttpGet(Name = "GetWeatherForecast")]
     public IEnumerable<WeatherForecast> Get()
     {
+        string key_goolge = Environment.GetEnvironmentVariable("API_KEY_GOOGLE_MAPS");
+        string otraApiKey = Environment.GetEnvironmentVariable("PRUBEA_DE_API_KEY");
+        Console.WriteLine($"esta es la otra clave {otraApiKey}");
+        Console.WriteLine($"La clave de la api de google es: {key_goolge ?? "No existe"}");
         return Enumerable.Range(1, 5).Select(index => new WeatherForecast
         {
             Date = DateOnly.FromDateTime(DateTime.Now.AddDays(index)),

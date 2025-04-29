@@ -1,3 +1,8 @@
+using DotNetEnv;
+
+var envFilePath = Path.Combine(Directory.GetCurrentDirectory(), ".env");
+DotNetEnv.Env.Load(envFilePath); 
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
