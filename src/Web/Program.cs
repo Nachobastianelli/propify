@@ -1,4 +1,8 @@
+using application.Interfaces;
+using application.Services;
+using domain.Interfaces;
 using DotNetEnv;
+using infrastructure.Repositories;
 
 var envFilePath = Path.Combine(Directory.GetCurrentDirectory(), ".env");
 DotNetEnv.Env.Load(envFilePath); 
@@ -11,6 +15,10 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+
+builder.Services.AddScoped<IClientService, ClientService>();
+builder.Services.AddScoped<IClientRepository, ClientRepository>();
 
 var app = builder.Build();
 

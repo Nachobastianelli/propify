@@ -4,9 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace domain.Entities
+namespace domain.Enums
 {
-    public class Owner : User
+    public enum DocumentType
     {
+        DNI,
+        DNIExtranjero
     }
 }
+    

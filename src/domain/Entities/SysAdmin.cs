@@ -1,4 +1,5 @@
-﻿using System;
+﻿using domain.Enums;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,7 +11,7 @@ namespace domain.Entities
     {
         public SysAdmin() { }
 
-        public SysAdmin(string name, string surname, string email, string password, string numberphone, Enum documentType, string dni) {
+        public SysAdmin(string name, string surname, string email, string password, string numberphone, DocumentType documentType, string dni) {
             Name = name;
             Surname = surname;
             Email = email;
