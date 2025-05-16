@@ -34,7 +34,7 @@ namespace domain.Entities
         public string Description { get; set; }
 
         [Required]
-        public Enum StateProperty { get; set; }
+        public PropertyState StateProperty { get; set; }
 
         public string Bathroom { get; set; }
         public string Room { get; set; }
@@ -43,7 +43,7 @@ namespace domain.Entities
 
         public Property() {}
 
-        public Property(string type, float squareMeters, int pricePerNight, int ownerId, int maxTenants,  string description, Enum stateProperty, string bath, string room, string streammingPlatform, string pool )
+        public Property(string type, float squareMeters, int pricePerNight, int ownerId, int maxTenants,  string description, PropertyState stateProperty, string bath, string room, string streammingPlatform, string pool )
         {
             Type = type;
             SquareMeters = squareMeters;

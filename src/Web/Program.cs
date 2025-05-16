@@ -1,4 +1,7 @@
 using DotNetEnv;
+using Infrastructure.Repositories;
+using Microsoft.Data.Sqlite;
+using Microsoft.EntityFrameworkCore;
 
 var envFilePath = Path.Combine(Directory.GetCurrentDirectory(), ".env");
 DotNetEnv.Env.Load(envFilePath); 
@@ -11,6 +14,27 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+//builder.Services.AddDbContext<ApplicationContext>(options => options.UseSqlite(
+//builder.Configuration["ConnectionStrings:DBConnectionString"], b->b.MigrationsAssembly("UserDemoApi")));
+
+// Services
+builder.Services.AddScoped<IPropertyService, PropertyService>();
+
+// Repositories
+builder.Services.AddScoped<IPropertyRepository, PropertyRepository>();
+
+var connection = new SqliteConnection("Data source = propify.db");
+connection.Open();
+
+using (var command = connection.CreateCommand())
+{
+    command.CommandText = "PRAGMA journal_mode = DELETE;";
+    command.ExecuteNonQuery();
+}
+
+builder.Services.AddDbContext<ApplicationContext>(options =>
+    options.UseSqlite(connection, b => b.MigrationsAssembly("infrastructure")));
 
 var app = builder.Build();
 
