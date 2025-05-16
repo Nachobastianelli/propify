@@ -14,7 +14,7 @@ namespace domain.Entities
         public string Email { get; set; }
         public string Password { get; set; }
         public string NumberPhone {  get; set; }
-        public Enum DocumentType { get; set; }
+        public DocumentType DocumentType { get; set; }
         public string Dni { get; set; }
     }
 }

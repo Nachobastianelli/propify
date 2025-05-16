@@ -9,7 +9,7 @@ namespace domain.Entities
     public class Client : User
     {
         public Client() { }
-        public Client(string name, string surname, string email, string password, string numberphone, Enum documentType, string dni)
+        public Client(string name, string surname, string email, string password, string numberphone, DocumentType documentType, string dni)
         {
             Name = name;
             Surname = surname;
