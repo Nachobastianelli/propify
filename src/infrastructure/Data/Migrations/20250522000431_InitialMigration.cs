@@ -2,7 +2,7 @@
 
 #nullable disable
 
-namespace infrastructure.Data.Migrations
+namespace Infrastructure.Data.Migrations
 {
     /// <inheritdoc />
     public partial class InitialMigration : Migration
@@ -28,6 +28,25 @@ namespace infrastructure.Data.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Owner", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "SysAdmin",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Name = table.Column<string>(type: "TEXT", nullable: false),
+                    Surname = table.Column<string>(type: "TEXT", nullable: false),
+                    Email = table.Column<string>(type: "TEXT", nullable: false),
+                    Password = table.Column<string>(type: "TEXT", nullable: false),
+                    NumberPhone = table.Column<string>(type: "TEXT", nullable: false),
+                    DocumentType = table.Column<int>(type: "INTEGER", nullable: false),
+                    Dni = table.Column<string>(type: "TEXT", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_SysAdmin", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -70,6 +89,9 @@ namespace infrastructure.Data.Migrations
         {
             migrationBuilder.DropTable(
                 name: "Properties");
+
+            migrationBuilder.DropTable(
+                name: "SysAdmin");
 
             migrationBuilder.DropTable(
                 name: "Owner");

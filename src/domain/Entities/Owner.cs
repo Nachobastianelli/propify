@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,13 +10,12 @@ namespace domain.Entities
 {
     public class Owner : User
     { 
-        public List<Property> Properties { get; set; }
-
-        public int Cvu {  get; set; }
+       
+        public int Cvu { get; set; }
 
         public Owner() { }
 
-        public Owner(string name, string surname, string email, string password, string numberphone, DocumentType documentType, string dni,int cvu) 
+        public Owner(string name, string surname, string email, string password, string numberphone, DocumentType documentType, string dni, int cvu) 
         { 
             Name = name;
             Surname = surname;
@@ -23,7 +24,6 @@ namespace domain.Entities
             NumberPhone = numberphone;
             DocumentType = documentType;
             Dni = dni;
-            
             Cvu = cvu;
         }
     }

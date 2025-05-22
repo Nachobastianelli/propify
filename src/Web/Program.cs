@@ -1,10 +1,6 @@
-using DotNetEnv;
 using Infrastructure.Repositories;
 using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
-
-var envFilePath = Path.Combine(Directory.GetCurrentDirectory(), ".env");
-DotNetEnv.Env.Load(envFilePath); 
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,26 +11,18 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-//builder.Services.AddDbContext<ApplicationContext>(options => options.UseSqlite(
-//builder.Configuration["ConnectionStrings:DBConnectionString"], b->b.MigrationsAssembly("UserDemoApi")));
-
 // Services
 builder.Services.AddScoped<IPropertyService, PropertyService>();
+builder.Services.AddScoped<IOwnerService, OwnerService>();
+builder.Services.AddScoped<ISysAdminService, SysAdminService>();
 
 // Repositories
 builder.Services.AddScoped<IPropertyRepository, PropertyRepository>();
-
-var connection = new SqliteConnection("Data source = propify.db");
-connection.Open();
-
-using (var command = connection.CreateCommand())
-{
-    command.CommandText = "PRAGMA journal_mode = DELETE;";
-    command.ExecuteNonQuery();
-}
+builder.Services.AddScoped<IOwnerRepository, OwnerRepository>();
+builder.Services.AddScoped<ISysAdminRepository, SysAdminRepository>();
 
 builder.Services.AddDbContext<ApplicationContext>(options =>
-    options.UseSqlite(connection, b => b.MigrationsAssembly("infrastructure")));
+    options.UseSqlite("Data Source=DB-PPS.db", b => b.MigrationsAssembly("Infrastructure")));
 
 var app = builder.Build();
 

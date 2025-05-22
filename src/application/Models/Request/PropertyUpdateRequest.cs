@@ -8,11 +8,10 @@ public class PropertyUpdateRequest
 
 
     public int PricePerNight { get; set; }
-
-
-    public int OwnerId { get; set; }
-
-    public Owner Owner { get; set; }
+    public string Country { get; set; }
+    public string Province { get; set; }
+    public string City { get; set; }
+    public string Street { get; set; }
 
     public int MaxTenants { get; set; }
 
@@ -23,4 +22,5 @@ public class PropertyUpdateRequest
     public string Room { get; set; }
     public string StreammingPlatform { get; set; }
     public string Pool { get; set; }
+   
 }

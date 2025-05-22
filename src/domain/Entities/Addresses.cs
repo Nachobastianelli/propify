@@ -10,7 +10,7 @@ namespace domain.Entities
     {
         public int Id { get; set; }
         public int IdProperty { get; set; }
-        public Property property { get; set; }
+
         public string Street {  get; set; }
         public string Country { get; set; }
         public string City { get; set; }
@@ -21,11 +21,10 @@ namespace domain.Entities
         public double Length {  get; set; }
         
         public Addresses() {}
-        public Addresses(int id, int idProperty, Property property, string street, string country, string city, int floor, string decorated, string observations, double latitude, double length)
+        public Addresses(int id, int idProperty, string street, string country, string city, int floor, string decorated, string observations, double latitude, double length)
         {
             Id = id;
             IdProperty = idProperty;
-            this.property = property;
             Street = street;
             Country = country;
             City = city;

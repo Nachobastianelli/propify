@@ -7,11 +7,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace infrastructure.Data.Migrations
+namespace Infrastructure.Data.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20250508214716_PropertyMigration")]
-    partial class PropertyMigration
+    [Migration("20250522000431_InitialMigration")]
+    partial class InitialMigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -57,7 +57,7 @@ namespace infrastructure.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Owner");
+                    b.ToTable("Owner", (string)null);
                 });
 
             modelBuilder.Entity("domain.Entities.Property", b =>
@@ -78,9 +78,6 @@ namespace infrastructure.Data.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<int>("OwnerId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int?>("OwnerId1")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Pool")
@@ -112,9 +109,45 @@ namespace infrastructure.Data.Migrations
 
                     b.HasIndex("OwnerId");
 
-                    b.HasIndex("OwnerId1");
-
                     b.ToTable("Properties");
+                });
+
+            modelBuilder.Entity("domain.Entities.SysAdmin", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Dni")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("DocumentType")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("NumberPhone")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Surname")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("SysAdmin", (string)null);
                 });
 
             modelBuilder.Entity("domain.Entities.Property", b =>
@@ -125,16 +158,7 @@ namespace infrastructure.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("domain.Entities.Owner", null)
-                        .WithMany("Properties")
-                        .HasForeignKey("OwnerId1");
-
                     b.Navigation("Owner");
-                });
-
-            modelBuilder.Entity("domain.Entities.Owner", b =>
-                {
-                    b.Navigation("Properties");
                 });
 #pragma warning restore 612, 618
         }

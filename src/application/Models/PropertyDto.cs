@@ -1,4 +1,5 @@
 using domain.Entities;
+using System.ComponentModel.DataAnnotations;
 
 public class PropertyDto
 {
@@ -8,14 +9,19 @@ public class PropertyDto
 
     public float SquareMeters { get; set; }
 
-
+    
     public int PricePerNight { get; set; }
+    public string Country { get; set; }
+    public string Province { get; set; }
+    public string City { get; set; }
+    public string Street { get; set; }
 
+    
     public int OwnerId { get; set; }
-
-    public Owner Owner { get; set; }
-
-    public int MaxTenants { get; set; }
+    
+    public OwnerPublicDto Owner { get; set; }
+    
+    public int MaxTenants { get; set; } 
 
     public string Description { get; set; }
     public PropertyState StateProperty { get; set; }
@@ -33,8 +39,12 @@ public class PropertyDto
             Type = property.Type,
             SquareMeters = property.SquareMeters,
             PricePerNight = property.PricePerNight,
+            Country = property.Country,
+            Province = property.Province,
+            City = property.City,
+            Street = property.Street,
             OwnerId = property.OwnerId,
-            Owner = property.Owner,
+            Owner = OwnerPublicDto.FromEntity(property.Owner),
             MaxTenants = property.MaxTenants,
             Description = property.Description,
             StateProperty = property.StateProperty,
@@ -52,8 +62,10 @@ public class PropertyDto
         {
             return null;
         }
+        
+        return properties.Select(Create).ToList(); // reutilizamos el método
 
-        return properties.Select(p => new PropertyDto
+        /* return properties.Select(p => new PropertyDto
         {
             Id = p.Id,
             Type = p.Type,
@@ -68,7 +80,7 @@ public class PropertyDto
             Room = p.Room,
             StreammingPlatform = p.StreammingPlatform,
             Pool = p.Pool,
-        }).ToList();
+        }).ToList(); */
 
     }
 }

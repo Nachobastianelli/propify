@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace infrastructure.Data.Migrations
+namespace Infrastructure.Data.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
     partial class ApplicationContextModelSnapshot : ModelSnapshot
@@ -15,6 +15,49 @@ namespace infrastructure.Data.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "9.0.4");
+
+            modelBuilder.Entity("domain.Entities.Addresses", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("City")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Country")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Decorated")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("Floor")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("IdProperty")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<double>("Latitude")
+                        .HasColumnType("REAL");
+
+                    b.Property<double>("Length")
+                        .HasColumnType("REAL");
+
+                    b.Property<string>("Observations")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Street")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Addresses");
+                });
 
             modelBuilder.Entity("domain.Entities.Owner", b =>
                 {
@@ -54,7 +97,7 @@ namespace infrastructure.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Owner");
+                    b.ToTable("Owner", (string)null);
                 });
 
             modelBuilder.Entity("domain.Entities.Property", b =>
@@ -64,6 +107,14 @@ namespace infrastructure.Data.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Bathroom")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("City")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Country")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
@@ -77,15 +128,16 @@ namespace infrastructure.Data.Migrations
                     b.Property<int>("OwnerId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int?>("OwnerId1")
-                        .HasColumnType("INTEGER");
-
                     b.Property<string>("Pool")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<int>("PricePerNight")
                         .HasColumnType("INTEGER");
+
+                    b.Property<string>("Province")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("Room")
                         .IsRequired()
@@ -101,6 +153,10 @@ namespace infrastructure.Data.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
+                    b.Property<string>("Street")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
                     b.Property<string>("Type")
                         .IsRequired()
                         .HasColumnType("TEXT");
@@ -109,9 +165,45 @@ namespace infrastructure.Data.Migrations
 
                     b.HasIndex("OwnerId");
 
-                    b.HasIndex("OwnerId1");
-
                     b.ToTable("Properties");
+                });
+
+            modelBuilder.Entity("domain.Entities.SysAdmin", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Dni")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("DocumentType")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("NumberPhone")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Surname")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("SysAdmin", (string)null);
                 });
 
             modelBuilder.Entity("domain.Entities.Property", b =>
@@ -122,16 +214,7 @@ namespace infrastructure.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("domain.Entities.Owner", null)
-                        .WithMany("Properties")
-                        .HasForeignKey("OwnerId1");
-
                     b.Navigation("Owner");
-                });
-
-            modelBuilder.Entity("domain.Entities.Owner", b =>
-                {
-                    b.Navigation("Properties");
                 });
 #pragma warning restore 612, 618
         }
